@@ -1,2 +1,7 @@
 .vscode/.ropeproject/config.py
 .vscode/.ropeproject/objectdb
+*.png
+*.ods
+__pycache__
+.~lock*
+*.csv

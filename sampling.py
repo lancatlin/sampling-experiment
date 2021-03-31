@@ -1,14 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-time_of_view = 0.5
+time_of_view = 1
 
 
 class Sampler:
     def __init__(self, frequency=10, phase=0, sampling_rate=20, quantizing_bits=4):
         self.frequency = frequency
         self.phase = 0
-        self.analog_time = np.linspace(0, time_of_view, 10**6)
+        self.analog_time = np.linspace(0, time_of_view, 10**3)
         sample_number = time_of_view * sampling_rate
         self.sampling_time = np.linspace(0, time_of_view, int(sample_number))
         quantizing_levels = 1 << quantizing_bits
@@ -26,20 +26,11 @@ class Sampler:
     def quantizing_signal(self):
         return np.round(self.sampling_signal() / self.quantizing_step) * self.quantizing_step
 
+    def fft(self):
+        return np.fft.fft(self.quantizing_signal())
+
 
 if __name__ == '__main__':
-    sampler = Sampler()
-    plt.plot(sampler.analog_time, sampler.analog_signal())
-    #plt.stem(sampling_time, quantizing_signal, linefmt='r-', markerfmt='rs', basefmt='r-')
-    plt.plot(sampler.sampling_time, sampler.quantizing_signal())
-    plt.title("Analog to digital signal conversion")
-    plt.xlabel("Time")
-    plt.ylabel("Amplitude")
+    sampler = Sampler(quantizing_bits=2, frequency=20, sampling_rate=30)
+    plt.stem(sampler.fft())
     plt.show()
-
-"""
-plt.stem(sampling_time, sampling_signal - quantizing_signal, linefmt='r-', markerfmt='rs', basefmt='r-')
-plt.xlabel("Time")
-plt.ylabel("Quantization error")
-plt.show()
-"""
