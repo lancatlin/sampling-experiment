@@ -16,5 +16,5 @@ def high_point(rate):
 
 if __name__ == '__main__':
     high_points = [high_point(i) for i in range(10, 100)]
-    #plt.plot(np.arange(10, 100), high_points)
-    # plt.show()
+    plt.plot(np.arange(10, 100), high_points)
+    plt.show()

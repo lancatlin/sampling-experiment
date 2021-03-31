@@ -31,6 +31,6 @@ class Sampler:
 
 
 if __name__ == '__main__':
-    sampler = Sampler(quantizing_bits=2, frequency=20, sampling_rate=30)
+    sampler = Sampler(quantizing_bits=16, frequency=20, sampling_rate=70)
     plt.stem(sampler.fft())
     plt.show()
