@@ -1,11 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 time_of_view = 1
 
 
 class Sampler:
-    def __init__(self, frequency=10, phase=0, sampling_rate=20, quantizing_bits=4):
+    def __init__(self, frequency=10, phase=0, sampling_rate=20, quantizing_bits=16):
         self.frequency = frequency
         self.phase = 0
         self.analog_time = np.linspace(0, time_of_view, 10**3)
@@ -31,6 +32,13 @@ class Sampler:
 
 
 if __name__ == '__main__':
-    sampler = Sampler(quantizing_bits=16, frequency=20, sampling_rate=70)
+    rate = 30
+    if len(sys.argv) > 1:
+        rate = int(sys.argv[1])
+        print(rate)
+
+    sampler = Sampler(sampling_rate=rate)
     plt.stem(sampler.fft())
-    plt.show()
+    plt.xlabel('Rate: {}'.format(rate))
+    plt.savefig('Rate_{}.png'.format(rate))
+    # plt.show()

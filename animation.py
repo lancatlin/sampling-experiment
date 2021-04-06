@@ -6,12 +6,14 @@ fig = plt.figure()
 
 
 def fft(rate):
-    sampler = Sampler(sampling_rate=rate, quantizing_bits=16)
+    sampler = Sampler(sampling_rate=rate)
     fig.clear()
     plt.stem(sampler.fft())
     plt.xlabel('sampling rate {}'.format(rate))
 
 
-ani = FuncAnimation(plt.gcf(), fft, interval=100, frames=range(10, 100, 2))
+ani = FuncAnimation(plt.gcf(), fft, interval=200, frames=range(10, 100, 2))
 
-plt.show()
+ani.save('animation.mp4', fps=4, extra_args=['-vcodec', 'libx264'])
+
+# plt.show()
