@@ -14,6 +14,7 @@ def fft(rate):
 
 ani = FuncAnimation(plt.gcf(), fft, interval=200, frames=range(10, 100, 2))
 
-ani.save('animation.mp4', fps=4, extra_args=['-vcodec', 'libx264'])
+# If you want to save the animation to a video, uncomment following line
+# ani.save('animation.mp4', fps=4, extra_args=['-vcodec', 'libx264'])
 
-# plt.show()
+plt.show()
